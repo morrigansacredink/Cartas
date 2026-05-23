@@ -10,63 +10,34 @@
 body{
     margin:0;
     background:#0b0b10;
+    font-family:Arial;
     display:flex;
     justify-content:center;
     align-items:center;
     min-height:100vh;
-    font-family:Arial;
-    overflow:hidden;
-}
-
-.message{
-    position:absolute;
-    top:20px;
-    color:white;
-    font-size:22px;
 }
 
 .container{
-    position:relative;
-    width:100%;
-    height:100vh;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    padding:40px;
 }
 
-/* CARTAS */
 .card{
     width:110px;
     height:170px;
-    background:#222;
     border-radius:12px;
-    position:absolute;
     cursor:pointer;
-    transition:transform 0.6s ease, top 1s ease, left 1s ease;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:12px;
-    text-align:center;
-    padding:8px;
-    box-sizing:border-box;
-    border:2px solid #444;
+    transition:0.4s;
+    background-image:url("back.png"); /* 👈 DORSO */
+    background-size:cover;
+    background-position:center;
 }
 
-/* cara boca abajo */
-.card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(135deg,#333,#111);
-    border-radius:12px;
-}
-
-.card.revealed::before{
-    display:none;
-}
-
-/* efecto selección */
-.card:hover{
-    transform:scale(1.08);
+.card.flipped{
+    transform:scale(1.05);
 }
 
 </style>
@@ -74,87 +45,100 @@ body{
 
 <body>
 
-<div class="message">Elige una carta</div>
+<div class="container">
 
-<div class="container" id="container"></div>
+<div class="card" data-name="inocencia" onclick="chooseCard(this)"></div>
+<div class="card" data-name="ligereza" onclick="chooseCard(this)"></div>
+<div class="card" data-name="nutrición" onclick="chooseCard(this)"></div>
+<div class="card" data-name="cercanía" onclick="chooseCard(this)"></div>
+<div class="card" data-name="apoyo" onclick="chooseCard(this)"></div>
+<div class="card" data-name="integración" onclick="chooseCard(this)"></div>
+<div class="card" data-name="paciencia" onclick="chooseCard(this)"></div>
+<div class="card" data-name="seguridad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="firmeza" onclick="chooseCard(this)"></div>
+<div class="card" data-name="fortaleza" onclick="chooseCard(this)"></div>
+<div class="card" data-name="valor" onclick="chooseCard(this)"></div>
+<div class="card" data-name="liberación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="transformación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="simplicidad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="presencia" onclick="chooseCard(this)"></div>
+<div class="card" data-name="confianza" onclick="chooseCard(this)"></div>
+<div class="card" data-name="autenticidad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="vulnerabilidad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="valentía" onclick="chooseCard(this)"></div>
+<div class="card" data-name="creatividad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="pasión" onclick="chooseCard(this)"></div>
+<div class="card" data-name="compañía" onclick="chooseCard(this)"></div>
+<div class="card" data-name="abundancia" onclick="chooseCard(this)"></div>
+<div class="card" data-name="plenitud" onclick="chooseCard(this)"></div>
+<div class="card" data-name="renovación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="calma" onclick="chooseCard(this)"></div>
+<div class="card" data-name="sensibilidad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="apertura" onclick="chooseCard(this)"></div>
+<div class="card" data-name="acogida" onclick="chooseCard(this)"></div>
+<div class="card" data-name="ternura" onclick="chooseCard(this)"></div>
+<div class="card" data-name="conexión" onclick="chooseCard(this)"></div>
+<div class="card" data-name="sintonía" onclick="chooseCard(this)"></div>
+<div class="card" data-name="entrelazo" onclick="chooseCard(this)"></div>
+<div class="card" data-name="reflejo" onclick="chooseCard(this)"></div>
+<div class="card" data-name="reconocimiento" onclick="chooseCard(this)"></div>
+<div class="card" data-name="rendición" onclick="chooseCard(this)"></div>
+<div class="card" data-name="esencia" onclick="chooseCard(this)"></div>
+<div class="card" data-name="despertar" onclick="chooseCard(this)"></div>
+<div class="card" data-name="revelación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="emerger" onclick="chooseCard(this)"></div>
+<div class="card" data-name="claridad" onclick="chooseCard(this)"></div>
+<div class="card" data-name="recepción" onclick="chooseCard(this)"></div>
+<div class="card" data-name="guía" onclick="chooseCard(this)"></div>
+<div class="card" data-name="respiro" onclick="chooseCard(this)"></div>
+<div class="card" data-name="expresión" onclick="chooseCard(this)"></div>
+<div class="card" data-name="fluidez" onclick="chooseCard(this)"></div>
+<div class="card" data-name="escucha" onclick="chooseCard(this)"></div>
+<div class="card" data-name="intuición" onclick="chooseCard(this)"></div>
+<div class="card" data-name="misterio" onclick="chooseCard(this)"></div>
+<div class="card" data-name="orientación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="movimiento" onclick="chooseCard(this)"></div>
+<div class="card" data-name="expansión" onclick="chooseCard(this)"></div>
+<div class="card" data-name="suspensión" onclick="chooseCard(this)"></div>
+<div class="card" data-name="aceptación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="desapego" onclick="chooseCard(this)"></div>
+<div class="card" data-name="desprender" onclick="chooseCard(this)"></div>
+<div class="card" data-name="empoderarse" onclick="chooseCard(this)"></div>
+<div class="card" data-name="purificación" onclick="chooseCard(this)"></div>
+<div class="card" data-name="insight" onclick="chooseCard(this)"></div>
+<div class="card" data-name="renacer" onclick="chooseCard(this)"></div>
+<div class="card" data-name="transcender" onclick="chooseCard(this)"></div>
+<div class="card" data-name="realización" onclick="chooseCard(this)"></div>
+<div class="card" data-name="gozo" onclick="chooseCard(this)"></div>
+<div class="card" data-name="elección" onclick="chooseCard(this)"></div>
+<div class="card" data-name="manifestar" onclick="chooseCard(this)"></div>
+<div class="card" data-name="hogar" onclick="chooseCard(this)"></div>
+
+</div>
 
 <script>
 
-const cards = [
-"inocencia","ligereza","nutrición","cercanía","apoyo","integración",
-"paciencia","seguridad","firmeza","fortaleza","valor","liberación",
-"transformación","simplicidad","presencia","confianza","autenticidad",
-"vulnerabilidad","valentía","creatividad","pasión","compañía","abundancia",
-"plenitud","renovación","calma","sensibilidad","apertura","acogida","ternura",
-"conexión","sintonía","entrelazo","reflejo","reconocimiento","rendición",
-"esencia","despertar","revelación","emerger","claridad","recepción","guía",
-"respiro","expresión","fluidez","escucha","intuición","misterio","orientación",
-"movimiento","expansión","suspensión","aceptación","desapego","desprender",
-"empoderarse","purificación","insight","renacer","transcender","realización",
-"gozo","elección","manifestar","hogar"
-];
+function chooseCard(el){
 
-const container = document.getElementById("container");
+    const name = el.dataset.name;
 
-let selected = false;
+    if(el.classList.contains("flipped")) return;
 
-// crear cartas
-cards.forEach((name, i) => {
+    el.classList.add("flipped");
 
-    const card = document.createElement("div");
-    card.className = "card";
-    card.dataset.name = name;
+    // 🔁 mostrar carta frontal
+    setTimeout(() => {
+        el.style.backgroundImage = `url('${name}.png')`;
+    }, 300);
 
-    // posición inicial en grupo (mazo)
-    card.style.left = "50%";
-    card.style.top = "50%";
-    card.style.transform = `translate(-50%,-50%) rotate(${Math.random()*20-10}deg)`;
-
-    card.innerHTML = name;
-
-    card.onclick = () => {
-
-        if(selected) return;
-        selected = true;
-
-        // revelar carta
-        card.classList.add("revealed");
-
-        // mostrar texto
-        card.innerHTML = name;
-
-        setTimeout(() => {
-
-            // 👉 CAMBIA AQUÍ TU URL DE FILL OUT
-            const url =
-            "https://build.fillout.com/editor/w962f2mHfTus/edit/jK39?tab=urlParameters&Barajar=https%3A%2F%2Fresplendent-froyo-eee219.netlify.app%2F&account=443757?carta=" +
-            encodeURIComponent(name);
-
-            window.location.href = url;
-
-        }, 1000);
-
-    };
-
-    container.appendChild(card);
-});
-
-// ANIMACIÓN DE “BARAJADO”
-function shuffleCards(){
-
-    const cardsEl = document.querySelectorAll(".card");
-
-    cardsEl.forEach((card, i) => {
-
-        const x = (Math.random() - 0.5) * window.innerWidth * 0.8;
-        const y = (Math.random() - 0.5) * window.innerHeight * 0.5;
-
-        card.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*360}deg)`;
-    });
+    // 🚀 enviar a Fillout
+    setTimeout(() => {
+        window.location.href =
+        "https://TUFORM.fillout.com/t/xxxxx?carta=" +
+        encodeURIComponent(name);
+    }, 1200);
 
 }
-
-setTimeout(shuffleCards, 500);
 
 </script>
 
