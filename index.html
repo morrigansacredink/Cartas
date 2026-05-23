@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartas</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#0b0b10;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    font-family:Arial;
+    overflow:hidden;
+}
+
+.message{
+    position:absolute;
+    top:20px;
+    color:white;
+    font-size:22px;
+}
+
+.container{
+    position:relative;
+    width:100%;
+    height:100vh;
+}
+
+/* CARTAS */
+.card{
+    width:110px;
+    height:170px;
+    background:#222;
+    border-radius:12px;
+    position:absolute;
+    cursor:pointer;
+    transition:transform 0.6s ease, top 1s ease, left 1s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:12px;
+    text-align:center;
+    padding:8px;
+    box-sizing:border-box;
+    border:2px solid #444;
+}
+
+/* cara boca abajo */
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,#333,#111);
+    border-radius:12px;
+}
+
+.card.revealed::before{
+    display:none;
+}
+
+/* efecto selección */
+.card:hover{
+    transform:scale(1.08);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="message">Elige una carta</div>
+
+<div class="container" id="container"></div>
+
+<script>
+
+const cards = [
+"inocencia","ligereza","nutrición","cercanía","apoyo","integración",
+"paciencia","seguridad","firmeza","fortaleza","valor","liberación",
+"transformación","simplicidad","presencia","confianza","autenticidad",
+"vulnerabilidad","valentía","creatividad","pasión","compañía","abundancia",
+"plenitud","renovación","calma","sensibilidad","apertura","acogida","ternura",
+"conexión","sintonía","entrelazo","reflejo","reconocimiento","rendición",
+"esencia","despertar","revelación","emerger","claridad","recepción","guía",
+"respiro","expresión","fluidez","escucha","intuición","misterio","orientación",
+"movimiento","expansión","suspensión","aceptación","desapego","desprender",
+"empoderarse","purificación","insight","renacer","transcender","realización",
+"gozo","elección","manifestar","hogar"
+];
+
+const container = document.getElementById("container");
+
+let selected = false;
+
+// crear cartas
+cards.forEach((name, i) => {
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.name = name;
+
+    // posición inicial en grupo (mazo)
+    card.style.left = "50%";
+    card.style.top = "50%";
+    card.style.transform = `translate(-50%,-50%) rotate(${Math.random()*20-10}deg)`;
+
+    card.innerHTML = name;
+
+    card.onclick = () => {
+
+        if(selected) return;
+        selected = true;
+
+        // revelar carta
+        card.classList.add("revealed");
+
+        // mostrar texto
+        card.innerHTML = name;
+
+        setTimeout(() => {
+
+            // 👉 CAMBIA AQUÍ TU URL DE FILL OUT
+            const url =
+            "https://build.fillout.com/editor/w962f2mHfTus/edit/jK39?tab=urlParameters&Barajar=https%3A%2F%2Fresplendent-froyo-eee219.netlify.app%2F&account=443757?carta=" +
+            encodeURIComponent(name);
+
+            window.location.href = url;
+
+        }, 1000);
+
+    };
+
+    container.appendChild(card);
+});
+
+// ANIMACIÓN DE “BARAJADO”
+function shuffleCards(){
+
+    const cardsEl = document.querySelectorAll(".card");
+
+    cardsEl.forEach((card, i) => {
+
+        const x = (Math.random() - 0.5) * window.innerWidth * 0.8;
+        const y = (Math.random() - 0.5) * window.innerHeight * 0.5;
+
+        card.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*360}deg)`;
+    });
+
+}
+
+setTimeout(shuffleCards, 500);
+
+</script>
+
+</body>
+</html>
