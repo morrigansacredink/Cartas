@@ -54,8 +54,11 @@ body{
 
 /* carta seleccionada */
 .card.selected{
+
     width:320px;
     height:500px;
+
+    position:fixed;
 
     left:50% !important;
     top:50% !important;
@@ -63,9 +66,9 @@ body{
     transform:
         translate(-50%, -50%)
         rotate(0deg)
-        scale(1.1);
+        scale(1);
 
-    z-index:999;
+    z-index:9999;
 }
 
 </style>
@@ -194,9 +197,8 @@ cards.forEach(card => {
 
     card.addEventListener("click", () => {
 
+        // si ya está seleccionada → saltar espera
         if(card.classList.contains("selected")){
-
-            // ⏩ saltar espera y volver al formulario
             goToForm(card.dataset.name);
             return;
         }
@@ -206,15 +208,15 @@ cards.forEach(card => {
 
         const name = card.dataset.name;
 
-        // mostrar imagen frontal
+        // mostrar frontal
         card.style.backgroundImage = `url('${name}.png')`;
 
-        // hacer grande
+        // hacer grande centrada
         setTimeout(() => {
             card.classList.add("selected");
         }, 100);
 
-        // permitir click SOLO en carta seleccionada
+        // permitir click solo en seleccionada
         card.style.pointerEvents = "auto";
 
         // ⏱️ esperar 10 segundos
@@ -232,7 +234,7 @@ function goToForm(name){
     clearTimeout(redirectTimeout);
 
     window.location.href =
-    "https://TUFORM.fillout.com/t/xxxxx?carta=" +
+    "https://build.fillout.com/editor/w962f2mHfTus/edit/jK39?tab=urlParameters&Barajar=https%3A%2F%2Fresplendent-froyo-eee219.netlify.app%2F&account=443757?carta=" +
     encodeURIComponent(name);
 }
 
