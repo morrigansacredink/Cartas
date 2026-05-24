@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale="1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cartas</title>
 
 <style>
@@ -11,6 +11,7 @@ body{
     margin:0;
     background:#0b0b10;
     font-family:Arial;
+    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -19,33 +20,52 @@ body{
 
 /* mesa */
 .container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    justify-content:center;
-    padding:40px;
-    max-width:1100px;
+    position:relative;
+    width:100vw;
+    height:100vh;
 }
 
-/* carta */
+/* cartas */
 .card{
+    position:absolute;
     width:110px;
     height:170px;
     border-radius:12px;
     cursor:pointer;
-    transition:0.4s;
     background-image:url("back.png");
     background-size:cover;
     background-position:center;
-    box-shadow:0 4px 10px rgba(0,0,0,0.4);
+    box-shadow:0 4px 12px rgba(0,0,0,0.5);
+
+    transition:
+        transform 3s ease,
+        left 2s ease,
+        top 2s ease,
+        width 3s ease,
+        height 3s ease;
+
+    z-index:1;
 }
 
+/* hover */
 .card:hover{
-    transform:translateY(-10px) scale(1.05);
+    transform:scale(1.05);
 }
 
-.card.flipped{
-    transform:scale(1.05);
+/* carta seleccionada */
+.card.selected{
+    width:320px;
+    height:500px;
+
+    left:50% !important;
+    top:50% !important;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg)
+        scale(1.1);
+
+    z-index:999;
 }
 
 </style>
@@ -55,123 +75,165 @@ body{
 
 <div class="container" id="container">
 
-<div class="card" data-name="inocencia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="ligereza" onclick="chooseCard(this)"></div>
-<div class="card" data-name="nutricion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="cercania" onclick="chooseCard(this)"></div>
-<div class="card" data-name="apoyo" onclick="chooseCard(this)"></div>
-<div class="card" data-name="integracion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="paciencia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="seguridad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="firmeza" onclick="chooseCard(this)"></div>
-<div class="card" data-name="fortaleza" onclick="chooseCard(this)"></div>
-<div class="card" data-name="valor" onclick="chooseCard(this)"></div>
-<div class="card" data-name="liberacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="transformacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="simplicidad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="presencia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="confianza" onclick="chooseCard(this)"></div>
-<div class="card" data-name="autenticidad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="vulnerabilidad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="valentia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="creatividad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="pasion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="compania" onclick="chooseCard(this)"></div>
-<div class="card" data-name="abundancia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="plenitud" onclick="chooseCard(this)"></div>
-<div class="card" data-name="renovacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="calma" onclick="chooseCard(this)"></div>
-<div class="card" data-name="sensibilidad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="apertura" onclick="chooseCard(this)"></div>
-<div class="card" data-name="acogida" onclick="chooseCard(this)"></div>
-<div class="card" data-name="ternura" onclick="chooseCard(this)"></div>
-<div class="card" data-name="conexion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="sintonia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="entrelazo" onclick="chooseCard(this)"></div>
-<div class="card" data-name="reflejo" onclick="chooseCard(this)"></div>
-<div class="card" data-name="reconocimiento" onclick="chooseCard(this)"></div>
-<div class="card" data-name="rendicion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="esencia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="despertar" onclick="chooseCard(this)"></div>
-<div class="card" data-name="revelacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="emerger" onclick="chooseCard(this)"></div>
-<div class="card" data-name="claridad" onclick="chooseCard(this)"></div>
-<div class="card" data-name="recepcion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="guia" onclick="chooseCard(this)"></div>
-<div class="card" data-name="respiro" onclick="chooseCard(this)"></div>
-<div class="card" data-name="expresion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="fluidez" onclick="chooseCard(this)"></div>
-<div class="card" data-name="escucha" onclick="chooseCard(this)"></div>
-<div class="card" data-name="intuicion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="misterio" onclick="chooseCard(this)"></div>
-<div class="card" data-name="orientacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="movimiento" onclick="chooseCard(this)"></div>
-<div class="card" data-name="expansion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="suspension" onclick="chooseCard(this)"></div>
-<div class="card" data-name="aceptacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="desapego" onclick="chooseCard(this)"></div>
-<div class="card" data-name="desprender" onclick="chooseCard(this)"></div>
-<div class="card" data-name="empoderarse" onclick="chooseCard(this)"></div>
-<div class="card" data-name="purificacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="insight" onclick="chooseCard(this)"></div>
-<div class="card" data-name="renacer" onclick="chooseCard(this)"></div>
-<div class="card" data-name="transcender" onclick="chooseCard(this)"></div>
-<div class="card" data-name="realizacion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="gozo" onclick="chooseCard(this)"></div>
-<div class="card" data-name="eleccion" onclick="chooseCard(this)"></div>
-<div class="card" data-name="manifestar" onclick="chooseCard(this)"></div>
-<div class="card" data-name="hogar" onclick="chooseCard(this)"></div>
+<div class="card" data-name="inocencia"></div>
+<div class="card" data-name="ligereza"></div>
+<div class="card" data-name="nutricion"></div>
+<div class="card" data-name="cercania"></div>
+<div class="card" data-name="apoyo"></div>
+<div class="card" data-name="integracion"></div>
+<div class="card" data-name="paciencia"></div>
+<div class="card" data-name="seguridad"></div>
+<div class="card" data-name="firmeza"></div>
+<div class="card" data-name="fortaleza"></div>
+<div class="card" data-name="valor"></div>
+<div class="card" data-name="liberacion"></div>
+<div class="card" data-name="transformacion"></div>
+<div class="card" data-name="simplicidad"></div>
+<div class="card" data-name="presencia"></div>
+<div class="card" data-name="confianza"></div>
+<div class="card" data-name="autenticidad"></div>
+<div class="card" data-name="vulnerabilidad"></div>
+<div class="card" data-name="valentia"></div>
+<div class="card" data-name="creatividad"></div>
+<div class="card" data-name="pasion"></div>
+<div class="card" data-name="compania"></div>
+<div class="card" data-name="abundancia"></div>
+<div class="card" data-name="plenitud"></div>
+<div class="card" data-name="renovacion"></div>
+<div class="card" data-name="calma"></div>
+<div class="card" data-name="sensibilidad"></div>
+<div class="card" data-name="apertura"></div>
+<div class="card" data-name="acogida"></div>
+<div class="card" data-name="ternura"></div>
+<div class="card" data-name="conexion"></div>
+<div class="card" data-name="sintonia"></div>
+<div class="card" data-name="entrelazo"></div>
+<div class="card" data-name="reflejo"></div>
+<div class="card" data-name="reconocimiento"></div>
+<div class="card" data-name="rendicion"></div>
+<div class="card" data-name="esencia"></div>
+<div class="card" data-name="despertar"></div>
+<div class="card" data-name="revelacion"></div>
+<div class="card" data-name="emerger"></div>
+<div class="card" data-name="claridad"></div>
+<div class="card" data-name="recepcion"></div>
+<div class="card" data-name="guia"></div>
+<div class="card" data-name="respiro"></div>
+<div class="card" data-name="expresion"></div>
+<div class="card" data-name="fluidez"></div>
+<div class="card" data-name="escucha"></div>
+<div class="card" data-name="intuicion"></div>
+<div class="card" data-name="misterio"></div>
+<div class="card" data-name="orientacion"></div>
+<div class="card" data-name="movimiento"></div>
+<div class="card" data-name="expansion"></div>
+<div class="card" data-name="suspension"></div>
+<div class="card" data-name="aceptacion"></div>
+<div class="card" data-name="desapego"></div>
+<div class="card" data-name="desprender"></div>
+<div class="card" data-name="empoderarse"></div>
+<div class="card" data-name="purificacion"></div>
+<div class="card" data-name="insight"></div>
+<div class="card" data-name="renacer"></div>
+<div class="card" data-name="transcender"></div>
+<div class="card" data-name="realizacion"></div>
+<div class="card" data-name="gozo"></div>
+<div class="card" data-name="eleccion"></div>
+<div class="card" data-name="manifestar"></div>
+<div class="card" data-name="hogar"></div>
 
 </div>
 
 <script>
 
 const container = document.getElementById("container");
+const cards = document.querySelectorAll(".card");
 
-// 🔀 barajar REAL cada vez (orden diferente siempre)
-function shuffleCards(){
+let redirectTimeout = null;
 
-    const cards = Array.from(container.children);
-
-    for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
+// 🎴 colocar cartas aleatorias
+function placeCards(){
 
     cards.forEach(card => {
-        container.appendChild(card);
 
-        // 🎴 posición tipo mesa desordenada
-        card.style.transform = `
-            rotate(${Math.random() * 12 - 6}deg)
-            translate(${Math.random() * 25}px, ${Math.random() * 25}px)
-        `;
+        const x = Math.random() * (window.innerWidth - 150);
+        const y = Math.random() * (window.innerHeight - 220);
+        const rotation = Math.random() * 40 - 20;
+
+        card.style.left = x + "px";
+        card.style.top = y + "px";
+
+        card.style.transform = `rotate(${rotation}deg)`;
+
     });
 }
 
-// 🚀 barajar al cargar SIEMPRE
-window.onload = shuffleCards;
+// 🌀 animación de barajado
+function shuffleAnimation(){
+
+    let count = 0;
+
+    const interval = setInterval(() => {
+
+        placeCards();
+
+        count++;
+
+        if(count > 8){
+            clearInterval(interval);
+        }
+
+    }, 300);
+}
+
+// 🚀 iniciar
+shuffleAnimation();
 
 // 🃏 elegir carta
-function chooseCard(el){
+cards.forEach(card => {
 
-    const name = el.dataset.name;
+    card.addEventListener("click", () => {
 
-    if(el.classList.contains("flipped")) return;
+        if(card.classList.contains("selected")){
 
-    el.classList.add("flipped");
+            // ⏩ saltar espera y volver al formulario
+            goToForm(card.dataset.name);
+            return;
+        }
 
-    // 🖼️ revelar carta
-    setTimeout(() => {
-        el.style.backgroundImage = `url('${name}.png')`;
-    }, 300);
+        // bloquear otras cartas
+        cards.forEach(c => c.style.pointerEvents = "none");
 
-    // ⏱️ esperar 8 segundos
-    setTimeout(() => {
-        window.location.href =
-        "https://TUFORM.fillout.com/t/xxxxx?carta=" +
-        encodeURIComponent(name);
-    }, 8000);
+        const name = card.dataset.name;
+
+        // mostrar imagen frontal
+        card.style.backgroundImage = `url('${name}.png')`;
+
+        // hacer grande
+        setTimeout(() => {
+            card.classList.add("selected");
+        }, 100);
+
+        // permitir click SOLO en carta seleccionada
+        card.style.pointerEvents = "auto";
+
+        // ⏱️ esperar 10 segundos
+        redirectTimeout = setTimeout(() => {
+            goToForm(name);
+        }, 10000);
+
+    });
+
+});
+
+// 🚀 ir a Fillout
+function goToForm(name){
+
+    clearTimeout(redirectTimeout);
+
+    window.location.href =
+    "https://TUFORM.fillout.com/t/xxxxx?carta=" +
+    encodeURIComponent(name);
 }
 
 </script>
