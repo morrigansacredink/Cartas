@@ -32,9 +32,11 @@ body{
     height:170px;
     border-radius:12px;
     cursor:pointer;
+
     background-image:url("back.png");
     background-size:cover;
     background-position:center;
+
     box-shadow:0 4px 12px rgba(0,0,0,0.5);
 
     transition:
@@ -55,20 +57,24 @@ body{
 /* carta seleccionada */
 .card.selected{
 
-    width:320px;
-    height:500px;
+    width:320px !important;
+    height:500px !important;
 
-    position:fixed;
+    position:fixed !important;
 
     left:50% !important;
     top:50% !important;
 
+    margin:0 !important;
+
+    z-index:9999 !important;
+
+    transition:all 3s ease !important;
+
     transform:
         translate(-50%, -50%)
         rotate(0deg)
-        scale(1);
-
-    z-index:9999;
+        scale(1) !important;
 }
 
 </style>
@@ -149,25 +155,24 @@ body{
 
 <script>
 
-const container = document.getElementById("container");
 const cards = document.querySelectorAll(".card");
 
 let redirectTimeout = null;
 
-// 🎴 colocar cartas aleatorias
+// 🎴 colocar cartas aleatoriamente
 function placeCards(){
 
     cards.forEach(card => {
 
         const x = Math.random() * (window.innerWidth - 150);
         const y = Math.random() * (window.innerHeight - 220);
+
         const rotation = Math.random() * 40 - 20;
 
         card.style.left = x + "px";
         card.style.top = y + "px";
 
         card.style.transform = `rotate(${rotation}deg)`;
-
     });
 }
 
@@ -189,21 +194,21 @@ function shuffleAnimation(){
     }, 300);
 }
 
-// 🚀 iniciar
+// 🚀 iniciar barajado
 shuffleAnimation();
 
-// 🃏 elegir carta
+// 🃏 click carta
 cards.forEach(card => {
 
     card.addEventListener("click", () => {
 
-        // si ya está seleccionada → saltar espera
+        // ⏩ click otra vez = ir antes
         if(card.classList.contains("selected")){
             goToForm(card.dataset.name);
             return;
         }
 
-        // bloquear otras cartas
+        // bloquear resto
         cards.forEach(c => c.style.pointerEvents = "none");
 
         const name = card.dataset.name;
@@ -211,17 +216,24 @@ cards.forEach(card => {
         // mostrar frontal
         card.style.backgroundImage = `url('${name}.png')`;
 
-        // hacer grande centrada
+        // reset inclinación
+        card.style.transform = "";
+
+        // ampliar y centrar
         setTimeout(() => {
+
             card.classList.add("selected");
+
         }, 100);
 
-        // permitir click solo en seleccionada
+        // permitir click solo en elegida
         card.style.pointerEvents = "auto";
 
         // ⏱️ esperar 10 segundos
         redirectTimeout = setTimeout(() => {
+
             goToForm(name);
+
         }, 10000);
 
     });
@@ -234,7 +246,7 @@ function goToForm(name){
     clearTimeout(redirectTimeout);
 
     window.location.href =
-    "https://build.fillout.com/editor/w962f2mHfTus/edit/jK39?tab=urlParameters&Barajar=https%3A%2F%2Fresplendent-froyo-eee219.netlify.app%2F&account=443757?carta=" +
+    "https://TUFORM.fillout.com/t/xxxxx?carta=" +
     encodeURIComponent(name);
 }
 
