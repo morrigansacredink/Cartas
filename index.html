@@ -12,10 +12,8 @@ body{
     background:#0b0b10;
     font-family:Arial;
     overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+    width:100vw;
+    height:100vh;
 }
 
 /* mesa */
@@ -28,8 +26,10 @@ body{
 /* cartas */
 .card{
     position:absolute;
+
     width:110px;
     height:170px;
+
     border-radius:12px;
     cursor:pointer;
 
@@ -40,9 +40,9 @@ body{
     box-shadow:0 4px 12px rgba(0,0,0,0.5);
 
     transition:
-        transform 3s ease,
         left 2s ease,
         top 2s ease,
+        transform 3s ease,
         width 3s ease,
         height 3s ease;
 
@@ -51,30 +51,25 @@ body{
 
 /* hover */
 .card:hover{
-    transform:scale(1.05);
+    filter:brightness(1.1);
 }
 
-/* carta seleccionada */
+/* carta ampliada */
 .card.selected{
+
+    position:fixed !important;
 
     width:240px !important;
     height:380px !important;
 
-    position:fixed !important;
-
-    left:50% !important;
-    top:50% !important;
-
-    margin:0 !important;
+    left:50vw !important;
+    top:50vh !important;
 
     z-index:9999 !important;
 
-    transition:all 3s ease !important;
-
     transform:
         translate(-50%, -50%)
-        rotate(0deg)
-        scale(1) !important;
+        rotate(0deg) !important;
 }
 
 </style>
@@ -82,7 +77,7 @@ body{
 
 <body>
 
-<div class="container" id="container">
+<div class="container">
 
 <div class="card" data-name="inocencia"></div>
 <div class="card" data-name="ligereza"></div>
@@ -157,15 +152,15 @@ body{
 
 const cards = document.querySelectorAll(".card");
 
-let redirectTimeout = null;
+let redirectTimeout;
 
-// 🎴 colocar cartas aleatoriamente
+// 🎴 posiciones aleatorias
 function placeCards(){
 
     cards.forEach(card => {
 
-        const x = Math.random() * (window.innerWidth - 150);
-        const y = Math.random() * (window.innerHeight - 220);
+        const x = Math.random() * (window.innerWidth - 130);
+        const y = Math.random() * (window.innerHeight - 190);
 
         const rotation = Math.random() * 40 - 20;
 
@@ -173,10 +168,11 @@ function placeCards(){
         card.style.top = y + "px";
 
         card.style.transform = `rotate(${rotation}deg)`;
+
     });
 }
 
-// 🌀 animación de barajado
+// 🌀 barajado
 function shuffleAnimation(){
 
     let count = 0;
@@ -187,49 +183,48 @@ function shuffleAnimation(){
 
         count++;
 
-        if(count > 8){
+        if(count >= 8){
             clearInterval(interval);
         }
 
     }, 300);
 }
 
-// 🚀 iniciar barajado
 shuffleAnimation();
 
-// 🃏 click carta
+// 🃏 seleccionar carta
 cards.forEach(card => {
 
     card.addEventListener("click", () => {
 
-        // ⏩ click otra vez = ir antes
+        const name = card.dataset.name;
+
+        // ⏩ click otra vez = ir ya
         if(card.classList.contains("selected")){
-            goToForm(card.dataset.name);
+            goToForm(name);
             return;
         }
 
-        // bloquear resto
+        // bloquear demás
         cards.forEach(c => c.style.pointerEvents = "none");
 
-        const name = card.dataset.name;
-
-        // mostrar frontal
+        // revelar imagen
         card.style.backgroundImage = `url('${name}.png')`;
 
-        // reset inclinación
+        // quitar rotación previa
         card.style.transform = "";
 
-        // ampliar y centrar
+        // ampliar centrada
         setTimeout(() => {
 
             card.classList.add("selected");
 
         }, 100);
 
-        // permitir click solo en elegida
+        // permitir click en seleccionada
         card.style.pointerEvents = "auto";
 
-        // ⏱️ esperar 10 segundos
+        // ⏱️ volver automáticamente en 10 segundos
         redirectTimeout = setTimeout(() => {
 
             goToForm(name);
@@ -240,7 +235,7 @@ cards.forEach(card => {
 
 });
 
-// 🚀 ir a Fillout
+// 🚀 ir al formulario
 function goToForm(name){
 
     clearTimeout(redirectTimeout);
